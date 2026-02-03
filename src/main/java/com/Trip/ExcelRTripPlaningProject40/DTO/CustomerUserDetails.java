@@ -19,7 +19,7 @@ public class CustomerUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-         return List.of(new SimpleGrantedAuthority(customer.getRole()));
+         return List.of(new SimpleGrantedAuthority("ROLE_"+customer.getRole()));
     }
 
     @Override

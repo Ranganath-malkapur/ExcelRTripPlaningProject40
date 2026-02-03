@@ -1,41 +1,29 @@
 package com.Trip.ExcelRTripPlaningProject40.Entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "jpa_customer")
+@Table(name = "Jpa_flight")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
-    
+public class Flight {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-
-    @Email(message = "Email must be Valid")
-    private String email;
-    
-    private String password;
-
-    // private Boolean isActive;
-
-    private String role;
-
-
-
+    private String source;
+    private String destination;
+    private LocalDate flightDate;
+    private double distance;
+    private double basePrice;
 }

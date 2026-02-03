@@ -21,4 +21,15 @@ public class GlobalException {
 
          return error;
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, Object> HandleNullPointerException(NullPointerException ex){
+        Map<String, Object> error = new HashMap<>();
+        error.put("Status", HttpStatus.BAD_REQUEST);
+        error.put("Message", ex.getMessage());
+        error.put("TimeStamp", LocalDateTime.now());
+        
+        return error;
+    }
 }

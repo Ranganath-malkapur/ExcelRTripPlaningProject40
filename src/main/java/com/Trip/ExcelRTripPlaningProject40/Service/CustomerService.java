@@ -26,7 +26,7 @@ public class CustomerService {
         }
 
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-        customer.setIsActive(false);
+        customer.setRole(customer.getRole());
         return cRepository.save(customer);
     }
 
@@ -38,5 +38,21 @@ public class CustomerService {
             throw new RuntimeException("Invalid Email or Password");
         }
         return customer;
+    }
+
+    public void setCustomerActive(Long id){
+        Customer exist = cRepository.findById(id)
+                  .orElseThrow(()-> new RuntimeException("Customer not Found with id "+id));
+
+             exist.setIsActive(true);
+             cRepository.save(exist);
+    }
+
+    public void giveRole(Customer customer ,Long id){
+         Customer exist = cRepository.findById(id)
+                  .orElseThrow(()-> new RuntimeException("Customer not Found with id "+id));
+
+            exist.setRole(customer.getRole());
+            cRepository.save(exist);
     }
 }

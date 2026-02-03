@@ -25,10 +25,15 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/customer/register", "/customer/login").permitAll()
+                .requestMatchers("/customer/setActive/{id}").hasRole("ADMIN")
+                .requestMatchers("/customer/giveRole/{id}").hasAllRoles("ADMIN")
+                .requestMatchers("/admin/addFlight").hasRole("ADMIN")
+                .requestMatchers("/api/booking/auto").hasAnyRole("ADMIN", "CUSTOMER")
+                .requestMatchers("/admin/viewFlights").permitAll()
                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
-                    return http.build();
+                return http.build();
     }
 
 }
