@@ -25,4 +25,24 @@ public class AdminService {
     public List<Flight> viewAllFlights(){
         return fRepository.findAll();
     }
+
+    public void deleteFlight(Flight flight, Long id){
+        Flight exisFlight = fRepository.findById(id)
+               .orElseThrow(()-> new RuntimeException("Flight are Not Found with id "+id));
+
+            fRepository.deleteById(id);
+    }
+
+    public void updateFlight(Flight flight, Long id){
+        Flight existFlight = fRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Flight are Not Found with id "+id));
+
+            existFlight.setSource(flight.getSource());
+            existFlight.setDestination(flight.getDestination());
+            existFlight.setFlightDate(flight.getFlightDate());
+            existFlight.setDistance(flight.getDistance());
+            existFlight.setBasePrice(flight.getBasePrice());
+            fRepository.save(existFlight);
+    }
+
 }

@@ -30,6 +30,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/admin/addFlight").hasRole("ADMIN")
                 .requestMatchers("/api/booking/auto").hasAnyRole("ADMIN", "CUSTOMER")
                 .requestMatchers("/admin/viewFlights").permitAll()
+                .requestMatchers("/admin/deleteFlight/{id}").hasRole("ADMIN")
+                .requestMatchers("/admin/updateFlight/{id}").hasAllRoles("ADMIN")
                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
